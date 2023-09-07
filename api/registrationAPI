@@ -1,0 +1,33 @@
+
+//const { response } = require("../app");
+const registrationService1 = require("../services/registrationService");
+// class RegistrationAPI {
+//     constructor() {
+//         this.invoke = async (request, response) => {
+//             let serviceResponse = {};
+//             await registrationService1.registrationService.createAccount(request, serviceResponse);
+//             return response.status(200).send(serviceResponse);
+//         };
+//     }
+// }
+// exports.registrationAPI_2 = new RegistrationAPI();
+// //# sourceMappingURL=registrationAPI.js.map
+
+exports.registerRoute = async function(req, res){
+    console.log(req.body);
+    const user = await registrationService1.registrationService.createAccount(req);
+    console.log(user);
+    let message;
+    let responseCode
+    if(user == null)
+    {
+        message = "Username already exists";
+        responseCode = 400;
+    }
+    else
+    {
+        message = "User registered successfully";
+        responseCode = 201;
+    }
+    res.status(responseCode).json({'user': user, 'message': message});
+}
