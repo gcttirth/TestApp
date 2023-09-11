@@ -28,9 +28,13 @@ async function insertOne(collectionName, data) {
 async function findOne(collectionName, query) {
     return await db.collection(collectionName).findOne(query);
 }
+async function updateOne(collectionName, query) {
+    return await db.collection(collectionName).updateOne(query);
+}
 
 exports.dbOperations = {
     connectToDB,
     insertOne,
-    findOne
+    findOne,
+    updateOne
 }
